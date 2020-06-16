@@ -5,6 +5,7 @@ board = {
     '7' : ' ', '8' : ' ', '9' : ' ',
     '4' : ' ', '5' : ' ', '6' : ' ',
     '1' : ' ', '2' : ' ', '3' : ' '}
+seed = 1
 
 def print_board():              #Function to print the board
     print(
@@ -17,12 +18,21 @@ def print_board():              #Function to print the board
 def clrscr():                   #Function to clear terminal viewport
     os.system('cls||clear')
 
-def ai_play():                  #Function to allow user to choose move
-    while True :
-        move = random.randint(1,9)
-        if board[str(move)] == ' ':
-            return move
-        else: continue
+def ai_play(board,avatar):                  #Function to allow user to choose move
+    if (board['7'] == board['8'] == avatar or board['3'] == board['6'] == avatar or board['1'] == board['5'] == avatar) and board['9'] == ' ':
+        return 9
+    elif (board['1'] == board['4'] == avatar or board['9'] == board['8'] == avatar or board['3'] == board['5'] == avatar) and board['7'] == ' ':
+        return 7
+    elif (board['3'] == board['2'] == avatar or board['7'] == board['4'] == avatar or board['9'] == board['5'] == avatar) and board['1'] == ' ':
+        return 1
+    elif (board['9'] == board['6'] == avatar or board['1'] == board['2'] == avatar or board['7'] == board['5'] == avatar) and board['3'] == ' ':
+        return 3
+    else:
+        while True :
+            move = random.randint(1,9)
+            if board[str(move)] == ' ':
+                return move
+            else: continue
 
 def user_play():                #Function to allow user to choose move
     while True:
@@ -56,12 +66,22 @@ def game_engine():
     clrscr()
     print_board()
     while flag == 1:
-        move = user_play()
-        board[str(move)] = avatar
-        count += 1
-        move = ai_play()
-        board[str(move)] = ai_avatar
-        count += 1
+        if seed == 1:
+            move = user_play()
+            board[str(move)] = avatar
+            count += 1
+            move = ai_play(board,avatar)
+            board[str(move)] = ai_avatar
+            count += 1
+        elif seed == -1:
+            move = ai_play(board,avatar)
+            board[str(move)] = ai_avatar
+            count += 1
+            clrscr()
+            print_board()
+            move = user_play()
+            board[str(move)] = avatar
+            count += 1
         clrscr()
         print_board()
         if count >= 5:
@@ -148,7 +168,7 @@ def game_engine():
                 print_board()
                 print("\nGame Over.\n")
                 if board['1'] == avatar:
-                    print(" **** You won! ****")
+                    print(" **** Congratz! You won! ****")
                 else:
                     print(" **** You lost! ****")                
                 break
@@ -161,6 +181,7 @@ def game_engine():
                 print("It's a Tie!!")
 
 def main():
+    global seed
     while True:
         clrscr()
         print('Welcome to Tic-Tac-Toe\n')
@@ -170,7 +191,10 @@ def main():
         if restart == 'Y' or 'y':
             for key in board.keys():
                 board[key] = ' '
+            seed *= -1
             continue
+        elif restart == 'N' or 'n':
+            raise SystemExit
         else:
             raise SystemExit
 
