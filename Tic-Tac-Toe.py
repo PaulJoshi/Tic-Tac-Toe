@@ -1,5 +1,5 @@
 import os
-import random
+import ai
 
 board = {
     '7' : ' ', '8' : ' ', '9' : ' ',
@@ -164,11 +164,15 @@ def game_engine():
                 flag = win_check(board,avatar)
                 if flag == 0:
                     break
-            move = ai_play(board,avatar)
+            move = ai.ai_play(board,avatar)
             board[str(move)] = ai_avatar
             count += 1
+            if count >= 5:
+                flag = win_check(board,avatar)
+                if flag == 0:
+                    break
         elif seed == -1:
-            move = ai_play(board,avatar)
+            move = ai.ai_play(board,avatar)
             board[str(move)] = ai_avatar
             count += 1
             clrscr()
@@ -180,6 +184,10 @@ def game_engine():
             move = user_play()
             board[str(move)] = avatar
             count += 1
+            if count >= 5:
+                flag = win_check(board,avatar)
+                if flag == 0:
+                    break
         clrscr()
         print_board()
 
@@ -194,6 +202,11 @@ def main():
         again=str(input("Do you want to play again(y,n): "))
         if again in ('n','N'):
             play = False
+        if again in ('Y','y'):
+            for key in board.keys():
+                board[key] = ' '
+            seed *= -1
+            continue
 
 if __name__ == '__main__':
     main()
