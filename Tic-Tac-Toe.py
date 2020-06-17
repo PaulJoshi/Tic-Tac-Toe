@@ -46,6 +46,96 @@ def user_play():                #Function to allow user to choose move
         except:
             print('Invalid move')
             continue
+
+def win_check(board,avatar):
+    if board['7'] == board['8'] == board['9'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['7'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    
+    elif board['4'] == board['5'] == board['6'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['4'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+
+    elif board['1'] == board['2'] == board['3'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['1'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    
+    elif board['1'] == board['4'] == board['7'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['1'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    
+    elif board['2'] == board['5'] == board['8'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['2'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    
+    elif board['3'] == board['6'] == board['9'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['3'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    
+    elif board['7'] == board['5'] == board['3'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['7'] == avatar:
+            print(" **** You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    
+    elif board['1'] == board['5'] == board['9'] != ' ':
+        flag = 0
+        clrscr()
+        print_board()
+        print("\nGame Over.\n")
+        if board['1'] == avatar:
+            print(" **** Congratz! You won! ****")
+        else:
+            print(" **** You lost! ****")                
+        return flag
+    return 1
         
 def game_engine():
     count = 0
@@ -70,6 +160,10 @@ def game_engine():
             move = user_play()
             board[str(move)] = avatar
             count += 1
+            if count >= 5:
+                flag = win_check(board,avatar)
+                if flag == 0:
+                    break
             move = ai_play(board,avatar)
             board[str(move)] = ai_avatar
             count += 1
@@ -79,124 +173,27 @@ def game_engine():
             count += 1
             clrscr()
             print_board()
+            if count >= 5:
+                flag = win_check(board,avatar)
+                if flag == 0:
+                    break
             move = user_play()
             board[str(move)] = avatar
             count += 1
         clrscr()
         print_board()
-        if count >= 5:
-            if board['7'] == board['8'] == board['9'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['7'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-            
-            elif board['4'] == board['5'] == board['6'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['4'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-
-            elif board['1'] == board['2'] == board['3'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['1'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-            
-            elif board['1'] == board['4'] == board['7'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['1'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-            
-            elif board['2'] == board['5'] == board['8'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['2'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-            
-            elif board['3'] == board['6'] == board['9'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['3'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-            
-            elif board['7'] == board['5'] == board['3'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['7'] == avatar:
-                    print(" **** You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-            
-            elif board['1'] == board['5'] == board['9'] != ' ':
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")
-                if board['1'] == avatar:
-                    print(" **** Congratz! You won! ****")
-                else:
-                    print(" **** You lost! ****")                
-                break
-
-            if count == 9:
-                flag = 0
-                clrscr()
-                print_board()
-                print("\nGame Over.\n")                
-                print("It's a Tie!!")
 
 def main():
     global seed
-    while True:
+    play = True
+    while play:
         clrscr()
         print('Welcome to Tic-Tac-Toe\n')
         print_board()
         game_engine()
-        restart = input('\nDo you want to play again?(y/n): ')
-        if restart == 'Y' or 'y':
-            for key in board.keys():
-                board[key] = ' '
-            seed *= -1
-            continue
-        elif restart == 'N' or 'n':
-            raise SystemExit
-        else:
-            raise SystemExit
+        again=str(input("Do you want to play again(y,n): "))
+        if again == 'n' or 'N':
+            play = False
 
 if __name__ == '__main__':
     main()
