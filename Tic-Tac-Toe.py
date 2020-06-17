@@ -15,7 +15,7 @@ def print_board():              #Function to print the board
         +'\t\t' + '-+-+-' + '\n'
         +'\t\t' + board['1'] + '|' + board['2'] + '|' + board['3'] + '\n')
 
-def clrscr():                   #Function to clear terminal viewport
+def clrscr():                   #Function to clear terminal viewport(Windows, Linux, MacOS compatible)
     os.system('cls||clear')
 
 def user_play():                #Function to allow user to choose move
@@ -25,13 +25,13 @@ def user_play():                #Function to allow user to choose move
             if board[str(move)] == ' ':
                 return move
             else: 
-                print('Invalid move')
+                print('\tInvalid move')
                 continue
         except:
-            print('Invalid move')
+            print('\tInvalid move')
             continue
 
-def tie_check(board):
+def tie_check(board):                   #Function to check if game is tied
     tie = False
     count = 0
     for key in board.keys():
@@ -42,14 +42,14 @@ def tie_check(board):
     if count == 9:
         return True
 
-def win_check(board,avatar):
+def win_check(board,avatar):                #Function to check status of the game(win/lose/tie)
     if board['7'] == board['8'] == board['9'] != ' ':
         flag = 0
         clrscr()
         print_board()
         print("\t      Game Over")
         if board['7'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -60,7 +60,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['4'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -71,7 +71,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['1'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -82,7 +82,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['1'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -93,7 +93,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['2'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -104,7 +104,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['3'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -115,7 +115,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['7'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -126,7 +126,7 @@ def win_check(board,avatar):
         print_board()
         print("\t      Game Over")
         if board['1'] == avatar:
-            print("   **** Congratz! You won! ****")
+            print("    **** Congratz! You won! ****")
         else:
             print("\t **** You lost! ****")                
         return flag
@@ -160,7 +160,7 @@ def game_engine():
     clrscr()
     print_board()
     while flag == 1:
-        if seed == 1:
+        if seed == 1:           #(2*n)th game, n = 0,1,2,...  User gets first turn
             move = user_play()
             board[str(move)] = avatar
             count += 1
@@ -171,7 +171,7 @@ def game_engine():
             count += 1
             if count >= 5 and win_check(board,avatar) == 0:
                 break
-        elif seed == -1:
+        elif seed == -1:            #((2*n) + 1)th game, n = 0,1,2,...  Program gets first turn
             move = ai.ai_play(board)
             board[str(move)] = ai_avatar
             count += 1
@@ -201,7 +201,7 @@ def main():
         if again in ('Y','y'):
             for key in board.keys():
                 board[key] = ' '
-            seed *= -1
+            seed *= -1                  #So that user and program gets first turn alternatively in each game
             continue
 
 if __name__ == '__main__':

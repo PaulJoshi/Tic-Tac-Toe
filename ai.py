@@ -1,4 +1,3 @@
-import random
 
 def ai_play(board):                  #Function to choose move
     if (board['5'] == ' '):
@@ -20,6 +19,7 @@ def ai_play(board):                  #Function to choose move
     elif (board['7'] == board['1'] != ' ' or board['6'] == board['5'] != ' ') and board['4'] == ' ':
         return 4
     else:
+        import random
         while True :
             move = random.randint(1,9)
             if board[str(move)] == ' ':
