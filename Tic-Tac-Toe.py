@@ -18,22 +18,6 @@ def print_board():              #Function to print the board
 def clrscr():                   #Function to clear terminal viewport
     os.system('cls||clear')
 
-def ai_play(board,avatar):                  #Function to allow user to choose move
-    if (board['7'] == board['8'] == avatar or board['3'] == board['6'] == avatar or board['1'] == board['5'] == avatar) and board['9'] == ' ':
-        return 9
-    elif (board['1'] == board['4'] == avatar or board['9'] == board['8'] == avatar or board['3'] == board['5'] == avatar) and board['7'] == ' ':
-        return 7
-    elif (board['3'] == board['2'] == avatar or board['7'] == board['4'] == avatar or board['9'] == board['5'] == avatar) and board['1'] == ' ':
-        return 1
-    elif (board['9'] == board['6'] == avatar or board['1'] == board['2'] == avatar or board['7'] == board['5'] == avatar) and board['3'] == ' ':
-        return 3
-    else:
-        while True :
-            move = random.randint(1,9)
-            if board[str(move)] == ' ':
-                return move
-            else: continue
-
 def user_play():                #Function to allow user to choose move
     while True:
         move = input("\tMake a move (1-9): ")
@@ -182,13 +166,13 @@ def game_engine():
             count += 1
             if count >= 5 and win_check(board,avatar) == 0:
                 break
-            move = ai.ai_play(board,avatar)
+            move = ai.ai_play(board)
             board[str(move)] = ai_avatar
             count += 1
             if count >= 5 and win_check(board,avatar) == 0:
                 break
         elif seed == -1:
-            move = ai.ai_play(board,avatar)
+            move = ai.ai_play(board)
             board[str(move)] = ai_avatar
             count += 1
             clrscr()
