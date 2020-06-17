@@ -141,12 +141,12 @@ def game_engine():
     count = 0
     flag = 1
     while True:
-        avatar = input('Which avatar(X,O) would you like? ')
-        if avatar == 'x' or 'X':
+        avatar = str(input('Which avatar(X,O) would you like? '))
+        if avatar in ('x','X'):
             avatar = 'X'
             ai_avatar = 'O'
             break
-        elif avatar == 'o' or 'O':
+        elif avatar in ('o','O'):
             avatar = 'O'
             ai_avatar = 'X'
             break
@@ -192,7 +192,7 @@ def main():
         print_board()
         game_engine()
         again=str(input("Do you want to play again(y,n): "))
-        if again == 'n' or 'N':
+        if again in ('n','N'):
             play = False
 
 if __name__ == '__main__':
