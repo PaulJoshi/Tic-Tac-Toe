@@ -42,60 +42,47 @@ def tie_check(board):                   #Function to check if game is tied
     if count == 9:
         return True
 
+def print_result(str,avatar):
+    print("\t      Game Over")
+    if board[str] == avatar:
+        print("    **** Congratz! You won! ****")
+    else:
+        print("\t **** You lost! ****")
+
 def win_check(board,avatar):                #Function to check status of the game(win/lose/tie)
     if board['7'] == board['8'] == board['9'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['7'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('7',avatar)              
         return flag
     
     elif board['4'] == board['5'] == board['6'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['4'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('4',avatar)              
         return flag
 
     elif board['1'] == board['2'] == board['3'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['1'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('1',avatar)                
         return flag
     
     elif board['1'] == board['4'] == board['7'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['1'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('1',avatar)                
         return flag
     
     elif board['2'] == board['5'] == board['8'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['2'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('2',avatar)              
         return flag
     
     elif board['3'] == board['6'] == board['9'] != ' ':
@@ -103,32 +90,21 @@ def win_check(board,avatar):                #Function to check status of the gam
         clrscr()
         print_board()
         print("\t      Game Over")
-        if board['3'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('3',avatar)              
         return flag
     
     elif board['7'] == board['5'] == board['3'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['7'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('7',avatar)                
         return flag
     
     elif board['1'] == board['5'] == board['9'] != ' ':
         flag = 0
         clrscr()
         print_board()
-        print("\t      Game Over")
-        if board['1'] == avatar:
-            print("    **** Congratz! You won! ****")
-        else:
-            print("\t **** You lost! ****")                
+        print_result('1',avatar)               
         return flag
 
     elif tie_check(board):
@@ -166,13 +142,13 @@ def game_engine():
             count += 1
             if count >= 5 and win_check(board,avatar) == 0:
                 break
-            move = ai.ai_play(board)
+            move = ai.ai_play(board,avatar)
             board[str(move)] = ai_avatar
             count += 1
             if count >= 5 and win_check(board,avatar) == 0:
                 break
         elif seed == -1:            #((2*n) + 1)th game, n = 0,1,2,...  Program gets first turn
-            move = ai.ai_play(board)
+            move = ai.ai_play(board,avatar)
             board[str(move)] = ai_avatar
             count += 1
             clrscr()
