@@ -43,6 +43,8 @@ def tie_check(board):                   #Function to check if game is tied
         return True
 
 def print_result(str,avatar):
+    clrscr()
+    print_board()
     print("\t      Game Over")
     if board[str] == avatar:
         print("    **** Congratz! You won! ****")
@@ -52,58 +54,41 @@ def print_result(str,avatar):
 def win_check(board,avatar):                #Function to check status of the game(win/lose/tie)
     if board['7'] == board['8'] == board['9'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('7',avatar)              
         return flag
     
     elif board['4'] == board['5'] == board['6'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('4',avatar)              
         return flag
 
     elif board['1'] == board['2'] == board['3'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('1',avatar)                
         return flag
     
     elif board['1'] == board['4'] == board['7'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('1',avatar)                
         return flag
     
     elif board['2'] == board['5'] == board['8'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('2',avatar)              
         return flag
     
     elif board['3'] == board['6'] == board['9'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
-        print("\t      Game Over")
         print_result('3',avatar)              
         return flag
     
     elif board['7'] == board['5'] == board['3'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('7',avatar)                
         return flag
     
     elif board['1'] == board['5'] == board['9'] != ' ':
         flag = 0
-        clrscr()
-        print_board()
         print_result('1',avatar)               
         return flag
 
@@ -114,7 +99,6 @@ def win_check(board,avatar):                #Function to check status of the gam
         print("\t      Game Over")
         print("\t**** It's a Tie! ****")
         return flag
-
     return 1
         
 def game_engine():
@@ -126,7 +110,7 @@ def game_engine():
             avatar = 'X'
             ai_avatar = 'O'
             break
-        elif avatar in ('o','O'):
+        elif avatar in ('o','O','0'):
             avatar = 'O'
             ai_avatar = 'X'
             break
@@ -172,13 +156,13 @@ def main():
         print_board()
         game_engine()
         again=str(input("\n  Do you want to play again(y,n): "))
-        if again in ('n','N'):
-            play = False
         if again in ('Y','y'):
             for key in board.keys():
                 board[key] = ' '
             seed *= -1                  #So that user and program gets first turn alternatively in each game
             continue
+        else:
+            play = False
 
 if __name__ == '__main__':
     main()
