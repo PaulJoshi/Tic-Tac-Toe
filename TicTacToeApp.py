@@ -5,7 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
-from kivy.graphics import *
+from kivy.graphics import Rectangle, Canvas
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -57,7 +57,7 @@ class MainWindow(Screen):
             return True
 
 
-    def win_check(self,board,avatar):                #Function to check status of the game(win/lose/tie)
+    def win_check(self,board,avatar):                #Function to check status of the game(win/lose)
         if board['7'] == board['8'] == board['9'] != ' ':
             return 0
         
@@ -84,9 +84,9 @@ class MainWindow(Screen):
 
         return 1
 
-    def press(self,pos):
+    def press(self,pos):        #executed when any of the 9 game buttons are touched/pressed
         app = App.get_running_app()
-        if app.flag == 1 :
+        if app.flag == 1 :              #checking that game has not ended
             app.board[pos] = app.avatar
             print('clicked pos: ' + pos)
             print('Value at clicked pos is: ' + app.board[pos])
@@ -184,7 +184,7 @@ class MainWindow(Screen):
         else:
             return
     
-    def newgame(self):
+    def newgame(self):      #Clears board and game variables for new game
         app = App.get_running_app()
         app.board = {
         '7' : ' ', '8' : ' ', '9' : ' ',
@@ -207,7 +207,7 @@ class MainWindow(Screen):
         self.ids.lbl1.text = ' '
         self.ids.lbl2.text = ' '
         self.ids.lbl3.text = ' '
-        if app.seed == -1:
+        if app.seed == -1:                  #block executes in every alternate game so that ai_play gets first turn
             move = ai.ai_play(app.board,app.avatar)
             print('ai move is: ')
             print(move)
@@ -239,11 +239,11 @@ class MyApp(App):
     '7' : ' ', '8' : ' ', '9' : ' ',
     '4' : ' ', '5' : ' ', '6' : ' ',
     '1' : ' ', '2' : ' ', '3' : ' '}
-    flag = 1
+    flag = 1            #turns to 0 when game ends
     sm = ScreenManager()
-    count = 0
+    count = 0           #takes count of total moves made by both user and ai_play combined
     avatar = 'X'
-    seed = 1
+    seed = 1            #variable(values[1/-1]) where 1 -> User gets first turn, -1 -> ai_play gets first turn
 
     def build(self):
         MyApp.sm.add_widget(MainWindow(name='main'))

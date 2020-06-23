@@ -22,6 +22,8 @@ def ai_play(board,avatar):                  #Function to choose move
         return 8
     elif (board['7'] == board['1'] == ai_avatar or board['6'] == board['5'] == ai_avatar) and board['4'] == ' ':
         return 4
+    elif (board['1'] == board['9'] == ai_avatar or board['3'] == board['7'] == ai_avatar) and board['5'] == ' ': #Center Case
+        return 5
     elif (board['7'] == board['8'] == avatar or board['3'] == board['6'] == avatar or board['1'] == board['5'] == avatar) and board['9'] == ' ':
         return 9
     elif (board['1'] == board['4'] == avatar or board['9'] == board['8'] == avatar or board['3'] == board['5'] == avatar) and board['7'] == ' ':
@@ -38,6 +40,8 @@ def ai_play(board,avatar):                  #Function to choose move
         return 8
     elif (board['7'] == board['1'] == avatar or board['6'] == board['5'] == avatar) and board['4'] == ' ':
         return 4
+    elif (board['1'] == board['9'] == avatar or board['3'] == board['7'] == avatar) and board['5'] == ' ':
+        return 5
     else:
         import random
         while True :
