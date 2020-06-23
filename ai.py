@@ -4,9 +4,9 @@ def ai_play(board,avatar):                  #Function to choose move
         ai_avatar = 'O'
     else:
         ai_avatar = 'X'
-    if (board['5'] == ' '):
-        return 5
-    elif (board['7'] == board['8'] == ai_avatar or board['3'] == board['6'] == ai_avatar or board['1'] == board['5'] == ai_avatar) and board['9'] == ' ':
+    #if (board['5'] == ' '):
+    #    return 5
+    if (board['7'] == board['8'] == ai_avatar or board['3'] == board['6'] == ai_avatar or board['1'] == board['5'] == ai_avatar) and board['9'] == ' ':
         return 9
     elif (board['1'] == board['4'] == ai_avatar or board['9'] == board['8'] == ai_avatar or board['3'] == board['5'] == ai_avatar) and board['7'] == ' ':
         return 7

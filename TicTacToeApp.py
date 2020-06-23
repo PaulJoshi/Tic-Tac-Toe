@@ -193,6 +193,11 @@ class MainWindow(Screen):
         app.flag = 1
         app.count = 0
         app.avatar = 'X'
+        if app.avatar == 'X':
+                ai_avatar = 'O'
+        else:
+                ai_avatar = 'X'
+        app.seed *= -1
         self.ids.lbl7.text = ' '
         self.ids.lbl8.text = ' '
         self.ids.lbl9.text = ' '
@@ -202,6 +207,31 @@ class MainWindow(Screen):
         self.ids.lbl1.text = ' '
         self.ids.lbl2.text = ' '
         self.ids.lbl3.text = ' '
+        if app.seed == -1:
+            move = ai.ai_play(app.board,app.avatar)
+            print('ai move is: ')
+            print(move)
+            app.board[str(move)] = ai_avatar
+            if str(move) == '7':
+                self.ids.lbl7.text = app.board[str(move)]
+            elif str(move) == '8':
+                self.ids.lbl8.text = app.board[str(move)]
+            elif str(move) == '9':
+                self.ids.lbl9.text = app.board[str(move)]
+            elif str(move) == '4':
+                self.ids.lbl4.text = app.board[str(move)]
+            elif str(move) == '5':
+                self.ids.lbl5.text = app.board[str(move)]
+            elif str(move) == '6':
+                self.ids.lbl6.text = app.board[str(move)]
+            elif str(move) == '1':
+                self.ids.lbl1.text = app.board[str(move)]
+            elif str(move) == '2':
+                self.ids.lbl2.text = app.board[str(move)]
+            elif str(move) == '3':
+                self.ids.lbl3.text = app.board[str(move)]
+            app.count += 1
+
 
 
 class MyApp(App):
@@ -213,6 +243,7 @@ class MyApp(App):
     sm = ScreenManager()
     count = 0
     avatar = 'X'
+    seed = 1
 
     def build(self):
         MyApp.sm.add_widget(MainWindow(name='main'))
